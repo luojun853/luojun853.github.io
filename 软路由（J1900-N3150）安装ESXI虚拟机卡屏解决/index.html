@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="软路由（J1900/N3150）安装ESXI虚拟机卡屏解决"><meta name="keywords" content="ESXI,软路由,OpenWRT,J1900"><meta name="author" content="Jemn"><meta name="copyright" content="Jemn"><title>软路由（J1900/N3150）安装ESXI虚拟机卡屏解决 | Jemn的杂物房</title><link rel="shortcut icon" href="https://blog.jemnluo.top/avatar.jpg"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  hexoVersion: '5.3.0'
+} </script><meta name="generator" content="Hexo 5.3.0"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%99%E7%A8%8B%E5%BC%80%E5%A7%8B"><span class="toc-number">1.</span> <span class="toc-text">教程开始</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0"><span class="toc-number">1.1.</span> <span class="toc-text">添加启动参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0%E6%B0%B8%E4%B9%85%E7%94%9F%E6%95%88"><span class="toc-number">1.2.</span> <span class="toc-text">使启动参数永久生效</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%90%AFESXI-Shell"><span class="toc-number">1.2.1.</span> <span class="toc-text">开启ESXI Shell</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E5%85%A5ESXI-Shell"><span class="toc-number">1.2.2.</span> <span class="toc-text">进入ESXI Shell</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E4%B8%8A%E5%AE%9E%E4%BD%93%E6%9C%BA%E5%AE%89%E8%A3%85%E6%88%90%E5%8A%9F%E5%9B%BE%E7%89%87"><span class="toc-number">2.</span> <span class="toc-text">附上实体机安装成功图片</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://blog.jemnluo.top/avatar.jpg"></div><div class="author-info__name text-center">Jemn</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">4</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">6</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">5</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://blog.jemnluo.top/bg.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Jemn的杂物房</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">🏠 主页</a><a class="site-page" href="/archives">📔 归档</a><a class="site-page" href="/tags">📌 标签</a><a class="site-page" href="/categories">💼 分类</a><a class="site-page" href="/links">🎁 友链</a><a class="site-page" href="/about">💌 关于</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">软路由（J1900/N3150）安装ESXI虚拟机卡屏解决</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2021-01-09</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/">路由器</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E8%B7%AF%E7%94%B1%E5%99%A8/%E8%99%9A%E6%8B%9F%E6%9C%BA/">虚拟机</a><div class="post-meta-wordcount"><span>字数总计: </span><span class="word-count">516</span><span class="post-meta__separator">|</span><span>阅读时长: 1 分钟</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>前段时间入手了入门软路由J1900，在学校跑20M校园网，物理机装OpenWRT性能太浪费了，于是就打算装个虚拟机跑一些东西。</p>
+<p>之前在家装过PVE，所以我打算试一下ESXI，在入手的时候我就做过预习，J1900/N3150因为核显的问题不能直接装ESXI，开机会卡在<code>Relocating modules and starting up the kernel</code></p>
+<img width = 80% src = "1.jpg">
+
+<p>办法倒是有，大多数都是在另一台电脑装好再把硬盘插在J1900上。VMware官方其实有对此问题提出解决方法。</p>
+<h1 id="教程开始"><a href="#教程开始" class="headerlink" title="教程开始"></a>教程开始</h1><h2 id="添加启动参数"><a href="#添加启动参数" class="headerlink" title="添加启动参数"></a>添加启动参数</h2><blockquote>
+<p>为了方便，以下部分截图使用虚拟机截图，操作和画面都和实体机一样</p>
+</blockquote>
+<p>在开机的时候出现VMware标题时时按<code>Shift+O</code>添加启动参数</p>
+<img width = 80% src = "3.png">
+
+<p>在末尾加个空格，然后输入以下语句</p>
+<p><code>ignoreHeadless=TRUE</code></p>
+<img width = 80% src = "4.png">
+
+<p>接着直接按回车，完成ESXI的安装，直到重启。</p>
+<p>安装完重启之后同样要在开始的标题用同样的方法插入启动参数来进入系统。</p>
+<h2 id="使启动参数永久生效"><a href="#使启动参数永久生效" class="headerlink" title="使启动参数永久生效"></a>使启动参数永久生效</h2><p>如果每次开机都要手动添加启动参数的话会很麻烦，所以我们要让参数永久生效。</p>
+<h3 id="开启ESXI-Shell"><a href="#开启ESXI-Shell" class="headerlink" title="开启ESXI Shell"></a>开启ESXI Shell</h3><p>开机后进入的主标题界面</p>
+<img width = 80% src = "8.png">
+
+<p>在主标题界面按<code>F2</code>并输入管理密码进入后台管理，进入后回车如图选择项</p>
+<img width = 80% src = "5.png" alt="进入后台后如图所示">
+
+<p>打开ESXI Shell，将第一项从这样</p>
+<img width = 80% src = "6.png">
+
+<p>回车后变成这样就说明开了</p>
+<img width = 80% src = "7.png">
+
+<p>然后按<code>ESC</code>键直到退出到进后台之前的标题画面</p>
+<h3 id="进入ESXI-Shell"><a href="#进入ESXI-Shell" class="headerlink" title="进入ESXI Shell"></a>进入ESXI Shell</h3><p>在主标题页面按<code>Alt+F1</code>进入ESXI Shell，输入用户名和密码登录</p>
+<img width = 80% src = "9.png">
+
+<p>输入<code>esxcfg-advcfg -k TRUE ignoreHeadless</code>后回车</p>
+<p>输入<code>esxcfg-advcfg -j ignoreHeadless</code>查看设置是否生效</p>
+<img width = 80% src = "10.png">
+
+<p>返回<code>TRUE</code>说明成功了</p>
+<p>之后按<code>Alt+F2</code>可以返回主界面</p>
+<p>恭喜你，你的J1900安装ESXI就此完成了，以后随便重启都不怕了</p>
+<h1 id="附上实体机安装成功图片"><a href="#附上实体机安装成功图片" class="headerlink" title="附上实体机安装成功图片"></a>附上实体机安装成功图片</h1><img width = 80% src = "2.jpg">
+
+<img width = 80% src = "11.png">
+
+<p>好了，本教程就到此结束啦</p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Jemn</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://blog.jemnluo.top/软路由（J1900-N3150）安装ESXI虚拟机卡屏解决/">https://blog.jemnluo.top/软路由（J1900-N3150）安装ESXI虚拟机卡屏解决/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.jemnluo.top">Jemn的杂物房</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/ESXI/">ESXI</a><a class="post-meta__tags" href="/tags/%E8%BD%AF%E8%B7%AF%E7%94%B1/">软路由</a><a class="post-meta__tags" href="/tags/OpenWRT/">OpenWRT</a><a class="post-meta__tags" href="/tags/J1900/">J1900</a></div><div class="social-share pull-right" data-disabled="qzone,facebook,diandian,google,douban,linkedin,tencent"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><nav id="pagination"><div class="prev-post pull-left"><a href="/ESXI%E8%99%9A%E6%8B%9F%E6%9C%BA-USB%E8%AE%BE%E5%A4%87%E4%B8%BA%E7%81%B0%E8%89%B2%E4%B8%8D%E5%8F%AF%E7%94%A8%E7%9A%84%E8%A7%A3%E5%86%B3/"><i class="fa fa-chevron-left">  </i><span>ESXI虚拟机 USB设备为灰色不可用的解决</span></a></div><div class="next-post pull-right"><a href="/%E7%89%A9%E7%90%86%E6%9C%BA%E5%AE%89%E8%A3%85OpenWRT%E5%8D%A1%E5%9C%A8booting-openwrt%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"><span>物理机安装OpenWRT卡在booting openwrt解决方法</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == 'true';
+var verify = 'false' == 'true';
+var record_ip = 'false' == 'true';
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  recordIP:record_ip,
+  appId:'mubjQ1iRFGKUfJHke8sofval-gzGzoHsz',
+  appKey:'efHAhjaQHTWGYreUOrdI12sU',
+  placeholder:'说点什么吧',
+  avatar:'mm',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer class="footer-bg" style="background-image: url(https://blog.jemnluo.top/bg.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2020 - 2021 By Jemn</div><div class="framework-info"><span>驱动 - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script></body></html>
